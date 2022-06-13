@@ -1,0 +1,25 @@
+﻿@using BlazorApp1.Models
+<h3>BAccordions</h3>
+
+<div class="accordion" id="accordionPanelsStayOpenExample">    
+    @foreach( var accordion in Accordions)
+    {
+      <div class="accordion-item">    
+        <h2 class="accordion-header" id="panelsStayOpen-heading@(accordion.Id.ToLower())">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse@(accordion.Id.ToLower())" aria-expanded="true" aria-controls="panelsStayOpen-collapse@(accordion.Id.ToLower())">
+            @accordion.Title
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapse@(accordion.Id.ToLower())" class="accordion-collapse collapse @(accordion.Active?"show":"")" aria-labelledby="panelsStayOpen-heading@(accordion.Id.ToLower())">
+          <div class="accordion-body">
+                @((MarkupString)accordion.Content)
+          </div>
+        </div>
+      </div>
+    } 
+</div>
+
+@code{
+     [Parameter]
+    public IEnumerable<BAccordion> Accordions { get; set; }
+}

@@ -1,0 +1,23 @@
+﻿@using BlazorApp1.Models
+<h3>BTabs</h3>
+<nav>
+  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+    @foreach(var tab in Tabs)
+    {
+        <button class="nav-link @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())-tab" data-bs-toggle="tab" data-bs-target="#nav-@(tab.Id.ToLower())" type="button" role="tab" aria-controls="nav-@(tab.Id.ToLower())" aria-selected="true">@tab.Title</button>    
+    }
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    @foreach(var tab in Tabs)
+    {
+        <div class="tab-pane fade show @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())" role="tabpanel" aria-labelledby="nav-@(tab.Id.ToLower())-tab">
+          @((MarkupString)tab.Content)
+        </div>
+    }
+  </div>
+@code {
+    [Parameter]
+    public IEnumerable<BTab> Tabs { get; set; }
+
+}

@@ -1,0 +1,28 @@
+﻿@page "/Accordion"
+@using BlazorApp1.Models
+
+<BAccordions Accordions="Accordions"></BAccordions>
+
+@code{
+     public BAccordion[] Accordions = new BAccordion[]
+        {
+            new BAccordion{
+                Id="home",
+                Title="Home",
+                Active=true,
+                Content=@"<p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
+            },
+            new BAccordion {
+                Id="profile",
+                Title="Profile",
+                Active=true,
+                Content=@"<p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
+            },
+            new BAccordion {
+                Id="contact",
+                Title="Contact",
+                Active=false,
+                Content=@"<p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
+            }
+        };
+}
