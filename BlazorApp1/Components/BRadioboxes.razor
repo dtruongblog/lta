@@ -1,0 +1,29 @@
+﻿@foreach(var radiobox in Radioboxes)
+{
+    <div class="form-check">
+        
+        <input class="form-check-input" type="radio" 
+            id="@radiobox.Id"
+            value="@radiobox.Id"
+            name="@radiobox.Name"
+            checked="@(radiobox.Id == Selected)"
+            @onchange="SelectionChanged"/>
+
+       <label class="form-check-label" for="@radiobox.Id">
+             @radiobox.Title
+        </label>       
+    </div>
+   
+}
+@code{
+    [Parameter]
+    public IEnumerable<BRadiobox> Radioboxes { get; set; }
+
+    [Parameter]
+    public string Selected { get; set; }    
+
+    void SelectionChanged(ChangeEventArgs args)
+    {
+      Selected = args.Value.ToString();
+    }
+}

@@ -1,28 +1,31 @@
-﻿@page "/checkboxes"
+﻿@page "/search-playground"
 @using BlazorApp1.Models
 
-<BChecks Checkboxes="BCheckboxes"></BChecks>
-<span class="badge bg-secondary"><span class="oi oi-trash p-sm-1" aria-hidden="true"></span>Test</span>
+<BTabs Tabs="Tabs"></BTabs>
 @code{
-    public BCheckbox[] BCheckboxes = new BCheckbox[]
+    public BTab[] Tabs = new BTab[]
     {
-        new BCheckbox {
+        new BTab {
             Id="home",
             Title="Home",
             Active=true,
             Content=@"<p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BCheckbox {
+        new BTab {
             Id="profile",
             Title="Profile",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BCheckbox {
+        new BTab {
             Id="contact",
             Title="Contact",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         }
+    };
+    public string[] Badges = new string[]
+    {
+        "home","profile", "contact"
     };
 }

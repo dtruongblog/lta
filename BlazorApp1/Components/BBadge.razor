@@ -1,0 +1,14 @@
+﻿<span class="badge bg-secondary p-2 m-2" @onclick="OnClick"><span class="oi oi-trash p-sm-1" aria-hidden="true" ></span>@Name</span>
+
+@code{
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnClickCallBack { get;set; }
+
+    void OnClick()
+    {
+        OnClickCallBack.InvokeAsync(Name);
+    }
+}

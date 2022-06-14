@@ -1,8 +1,8 @@
 ﻿<nav>
   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-    @foreach(var tab in Tabs)
+    @foreach(var filter in Filters)
     {
-        <button class="nav-link @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())-tab" data-bs-toggle="tab" data-bs-target="#nav-@(tab.Id.ToLower())" type="button" role="tab" aria-controls="nav-@(tab.Id.ToLower())" aria-selected="true">@tab.Title</button>    
+        <button class="nav-link @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())-tab" data-bs-toggle="tab" data-bs-target="#nav-@(tab.Id.ToLower())" type="button" role="tab" aria-controls="nav-@(tab.Id.ToLower())" aria-selected="true">@filter.T</button>    
     }
   </div>
 </nav>
@@ -16,9 +16,6 @@
   </div>
 @code {
     [Parameter]
-    public IEnumerable<BTab> Tabs { get; set; }
-
-     [Parameter]
-    public IEnumerable<BCheckbox> Checkboxes { get; set; }
+    public IEnumerable<BFilter> Filters { get; set; }
 
 }

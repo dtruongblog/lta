@@ -1,28 +1,33 @@
-﻿@page "/checkboxes"
+﻿@page "/radioboxes"
 @using BlazorApp1.Models
 
-<BChecks Checkboxes="BCheckboxes"></BChecks>
-<span class="badge bg-secondary"><span class="oi oi-trash p-sm-1" aria-hidden="true"></span>Test</span>
+<BRadioboxes Radioboxes="BRadioboxes" Selected="@Selected"></BRadioboxes>
+
 @code{
-    public BCheckbox[] BCheckboxes = new BCheckbox[]
+    public BRadiobox[] BRadioboxes = new BRadiobox[]
     {
-        new BCheckbox {
+        new BRadiobox {
             Id="home",
             Title="Home",
+            Name= "TestRadio",
             Active=true,
             Content=@"<p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BCheckbox {
+        new BRadiobox {
             Id="profile",
             Title="Profile",
+            Name= "TestRadio",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BCheckbox {
+        new BRadiobox {
             Id="contact",
             Title="Contact",
+            Name= "TestRadio",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         }
     };
+
+    public string Selected { get; set; } = "profile";
 }
