@@ -1,8 +1,46 @@
 ﻿@foreach(var checkbox in Checkboxes)
 {
-    <BCheck bCheckbox="checkbox"></BCheck>
-}
-@code{
+    <BCheck bCheckbox="checkbox" OnClickedEvent="OnValueChanged"></BCheck>
+}  
+@code
+{
+    [Parameter]
+    public string Identifer { get; set; }
+
     [Parameter]
     public IEnumerable<BCheckbox> Checkboxes { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnValueChangeEvent { get; set;} 
+
+    string GetId(string CheckboxID) => $"{Identifer}-{CheckboxID}";
+
+    protected override void OnParametersSet()
+    {
+        SelectedValue = new List<string>();
+        foreach (var checkbox in Checkboxes)
+        {
+            if (checkbox.Active)
+            {
+                SelectedValue.Add(GetId(checkbox.Id));
+            }
+        }
+    }
+    public List<string> SelectedValue { get; set; }
+
+    public void OnValueChanged(string value)
+    {
+        var IdString = GetId(value);
+        if (SelectedValue.Contains(IdString))
+        {
+            SelectedValue.Remove(IdString);
+        }
+        else
+        {
+            SelectedValue.Add(IdString);
+        }
+        OnValueChangeEvent.InvokeAsync(IdString);
+    }
+
+    
 }

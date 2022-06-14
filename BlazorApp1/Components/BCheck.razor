@@ -1,5 +1,5 @@
 ﻿<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="bCheck-@bCheckbox.Id" @bind="bCheckbox.Active">
+  <input class="form-check-input" type="checkbox" value="" id="bCheck-@bCheckbox.Id" @bind="bCheckbox.Active" @onclick="OnClicked">
   <label class="form-check-label" for="flexCheckDefault">
     @bCheckbox.Title
   </label>
@@ -8,4 +8,12 @@
 {
     [Parameter]
     public BCheckbox bCheckbox { get; set; }
-}
+
+    [Parameter]
+    public EventCallback<string> OnClickedEvent { get; set;} 
+
+    void OnClicked()
+    {
+        OnClickedEvent.InvokeAsync(bCheckbox.Id);
+    }
+ }

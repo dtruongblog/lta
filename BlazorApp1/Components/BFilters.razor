@@ -1,21 +1,54 @@
-﻿<nav>
-  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-    @foreach(var filter in Filters)
+﻿<div class="accordion" id="accordionPanelsStayOpenExample">    
+    @foreach( var filter in Filters)
     {
-        <button class="nav-link @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())-tab" data-bs-toggle="tab" data-bs-target="#nav-@(tab.Id.ToLower())" type="button" role="tab" aria-controls="nav-@(tab.Id.ToLower())" aria-selected="true">@filter.T</button>    
-    }
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-    @foreach(var tab in Tabs)
-    {
-        <div class="tab-pane fade show @(tab.Active?"active":"")" id="nav-@(tab.Id.ToLower())" role="tabpanel" aria-labelledby="nav-@(tab.Id.ToLower())-tab">
-          @((MarkupString)tab.Content)
+      <div class="accordion-item">    
+        <h2 class="accordion-header" id="panelsStayOpen-heading@(filter.Id.ToLower())">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse@(filter.Id.ToLower())" aria-expanded="true" aria-controls="panelsStayOpen-collapse@(filter.Id.ToLower())">
+            @filter.Title
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapse@(filter.Id.ToLower())" class="accordion-collapse collapse @(filter.Active?"show":"")" aria-labelledby="panelsStayOpen-heading@(filter.Id.ToLower())">
+          <div class="accordion-body">
+                <BChecks Checkboxes="filter.Checkboxes" Identifer="@filter.Id" OnValueChangeEvent="OnValueChanged"></BChecks>
+          </div>
         </div>
-    }
-  </div>
-@code {
+      </div>
+    }    
+</div>
+<BBadges Badges="SelectedValue.ToList()"></BBadges>
+
+@code{
     [Parameter]
     public IEnumerable<BFilter> Filters { get; set; }
+
+    public List<string> SelectedValue { get; set; }
+
+     string GetId(string Identifer,string CheckboxID) => $"{Identifer}-{CheckboxID}";
+
+    protected override void OnParametersSet()
+    {
+        SelectedValue = new List<string>();
+        foreach (var filter in Filters)
+        {
+            foreach (var checkbox in filter.Checkboxes)
+            {
+                if (checkbox.Active)
+                {
+                    SelectedValue.Add(GetId(filter.Id,checkbox.Id));
+                }
+            }
+        }
+    }
+    protected void OnValueChanged(string value)
+    {
+        if (SelectedValue.Contains(value))
+        {
+            SelectedValue.Remove(value);
+        }
+        else
+        {
+            SelectedValue.Add(value);
+        }
+    }
 
 }

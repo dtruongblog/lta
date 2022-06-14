@@ -1,31 +1,47 @@
 ﻿@page "/search-playground"
 @using BlazorApp1.Models
 
-<BTabs Tabs="Tabs"></BTabs>
+<BFilters Filters="bFilters"></BFilters>
+
 @code{
-    public BTab[] Tabs = new BTab[]
+    public BFilter[] bFilters = new BFilter[]
+        {
+            new BFilter
+            {                 
+                    Id="home",
+                    Title="Home",
+                    Active=true,
+                    Content=@"<p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>",
+                    Checkboxes=GetCheckboxes().ToList()
+                    
+            },
+            new BFilter {
+                Id="profile",
+                Title="Profile",
+                Active=true,
+                Content=@"<p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>",
+                Checkboxes= GetCheckboxes().ToList()
+            }
+        };
+       public static BCheckbox[] GetCheckboxes() => new BCheckbox[]
     {
-        new BTab {
+        new BCheckbox {
             Id="home",
             Title="Home",
             Active=true,
             Content=@"<p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BTab {
+        new BCheckbox {
             Id="profile",
             Title="Profile",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         },
-        new BTab {
+        new BCheckbox {
             Id="contact",
             Title="Contact",
             Active=false,
             Content=@"<p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>"
         }
-    };
-    public string[] Badges = new string[]
-    {
-        "home","profile", "contact"
     };
 }

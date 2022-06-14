@@ -1,10 +1,7 @@
 ﻿namespace BlazorApp1.Models
 {
-    public class BFilter : BaseComponent
+    public class BFilter: BaseComponent
     {
-        BTab Tab { get; set; }
-
-        List<BCheckbox> Checkboxes { get; set; }
+       public List<BCheckbox> Checkboxes { get; set; }
     }
-    
 }
