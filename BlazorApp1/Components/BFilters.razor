@@ -15,7 +15,7 @@
       </div>
     }    
 </div>
-<BBadges Badges="SelectedValue.ToList()"></BBadges>
+<BBadges Badges="SelectedValue.ToList()" OnValueChangeEvent="OnBadgesValueChangeEvent"></BBadges>
 
 @code{
     [Parameter]
@@ -23,7 +23,23 @@
 
     public List<string> SelectedValue { get; set; }
 
-     string GetId(string Identifer,string CheckboxID) => $"{Identifer}-{CheckboxID}";
+    string GetId(string Identifer,string CheckboxID) => $"{Identifer}-{CheckboxID}";
+
+    protected void OnBadgesValueChangeEvent(string Badge)
+    {
+        foreach (var filter in Filters)
+        {
+            foreach (var checkbox in filter.Checkboxes)
+            {
+                if (GetId(filter.Id, checkbox.Id) == Badge)
+                {
+                    checkbox.Active = false;
+                    OnValueChanged(GetId(filter.Id, checkbox.Id));
+                }
+            }
+
+        }
+    }
 
     protected override void OnParametersSet()
     {
@@ -41,6 +57,11 @@
     }
     protected void OnValueChanged(string value)
     {
+        Console.WriteLine("Selected value:");
+        foreach (var selectValue in SelectedValue)
+        {
+            Console.Write($"{selectValue} ");
+        }
         if (SelectedValue.Contains(value))
         {
             SelectedValue.Remove(value);
@@ -49,6 +70,7 @@
         {
             SelectedValue.Add(value);
         }
+        
     }
 
 }

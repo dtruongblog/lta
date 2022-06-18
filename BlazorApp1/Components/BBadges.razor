@@ -1,11 +1,19 @@
 ﻿@foreach(var badge in Badges)
 {
-<BBadge Name="@badge" OnClickCallBack="RemoveBadge"></BBadge>
+    <BBadge Name="@badge" OnClickCallBack="RemoveBadge"></BBadge>
 }
 
 @code{
     [Parameter]
     public List<string> Badges { get; set; }
 
-    void RemoveBadge(string badge) => Badges.Remove(badge);
+    [Parameter]
+    public EventCallback<string> OnValueChangeEvent { get; set;}
+
+    void RemoveBadge(string badge) 
+    {         
+        Badges.Remove(badge);
+        OnValueChangeEvent.InvokeAsync(badge);
+        StateHasChanged();
+    }
 }
