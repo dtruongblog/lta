@@ -1,0 +1,14 @@
+﻿<select class="@ClassName" style="max-width:13rem"><!--!-->
+    <option>@bSelectModel.PlaceHolder</option><!--!-->
+    @foreach(var option in bSelectModel.Options)
+    {
+        <option value="@option.Value">@option.Text</option>
+    }
+</select>
+
+@code{
+    [Parameter]
+    public BSelectModel bSelectModel { get; set; }
+    [Parameter]
+    public string ClassName { get; set; }
+}

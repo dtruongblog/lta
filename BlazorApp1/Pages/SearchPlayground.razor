@@ -1,7 +1,13 @@
 ﻿@page "/search-playground"
 @using BlazorApp1.Models
-
-<BFilters Filters="bFilters"></BFilters>
+<div class="row">
+    <div class="col-4">
+        <BFilters Filters="bFilters"></BFilters>
+    </div>
+    <div class="col-8">  
+        <BSearch FilterModel="bFilterModel" FilterClassName="@bFilterClassName" OrderByModel="bOrderByModel" OrderByClassName="@bFilterClassName"></BSearch>
+      </div>
+</div>   
 
 @code{
     public BFilter[] bFilters = new BFilter[]
@@ -23,7 +29,44 @@
                 Checkboxes= GetCheckboxes().ToList()
             }
         };
-       public static BCheckbox[] GetCheckboxes() => new BCheckbox[]
+    public BSelectModel bFilterModel = new BSelectModel
+    {
+            Id = "filterBy",
+            Name = "filterBy",
+            PlaceHolder = "Filter By...",
+            Options = new BSelectOption[2]        {
+                new BSelectOption
+                {
+                    Text="By All",
+                    Value="all"
+                },
+                new BSelectOption
+                {
+                    Text="By Name",
+                    Value="name"
+                }
+        }
+    };
+    public BSelectModel bOrderByModel = new BSelectModel
+    {
+            Id = "orderBy",
+            Name = "orderBy",
+            PlaceHolder = "Order By...",
+            Options = new BSelectOption[2]        {
+                new BSelectOption
+                {
+                    Text="Creation Ascending",
+                    Value="create"
+                },
+                new BSelectOption
+                {
+                    Text="Creation Decending",
+                    Value="-create"
+                }
+        }
+    };
+    public string bFilterClassName = "custom-select";
+    public static BCheckbox[] GetCheckboxes() => new BCheckbox[]
     {
         new BCheckbox {
             Id="home",

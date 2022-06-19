@@ -1,0 +1,23 @@
+﻿ <div class="d-flex justify-content-between">            
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Keywords" aria-label="Keywords" aria-describedby="addon-wrapping">
+                <BSelect bSelectModel="FilterModel" ClassName="@FilterClassName"></BSelect>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+             </div>
+             <div class="input-group float-end justify-content-end">                
+              <BSelect bSelectModel="OrderByModel" ClassName="@OrderByClassName"></BSelect>
+               </div>
+</div>
+@code{
+    [Parameter]
+    public BSelectModel FilterModel { get; set; }
+
+    [Parameter]
+    public string FilterClassName { get; set; }
+
+    [Parameter]
+    public BSelectModel OrderByModel { get; set; }
+
+    [Parameter]
+    public string OrderByClassName { get; set; }
+}

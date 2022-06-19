@@ -1,0 +1,25 @@
+﻿@page "/filterby"
+
+<BSelect bSelectModel="bSelectModel" ClassName="bClassName"></BSelect>
+
+@code {
+    public BSelectModel bSelectModel = new BSelectModel
+        {
+            Id = "filterBy",
+            Name = "filterBy",
+            PlaceHolder = "Filter By...",
+            Options = new BSelectOption[2]        {
+                new BSelectOption
+                {
+                    Text="Creation Ascending",
+                    Value="create"
+                },
+                new BSelectOption
+                {
+                    Text="Creation Decending",
+                    Value="-create"
+                }
+        }
+        };
+    public string bClassName = "custom-select";
+}
